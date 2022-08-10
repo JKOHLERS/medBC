@@ -7,7 +7,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FanTest {
-    final static Fan fanTest = new Fan("Ceiling Fan Test");
+    Fan fanTest;
+    @BeforeEach
+    void setUp(){
+        fanTest = new Fan("Ceiling Fan Test");
+    }
 
     @Test
     @DisplayName("Pull the speed cord to set the speed 2")
@@ -23,6 +27,8 @@ class FanTest {
     @DisplayName("Pull the speed cord to back the speed 0")
     void pullSpeedCordTestBackToOff() {
         final int expected = 0;
+        fanTest.pullSpeedCord(); //speed 0 to 1
+        fanTest.pullSpeedCord(); //speed 1 to 2
         fanTest.pullSpeedCord(); //speed 2 to 0
         final int actual = fanTest.getSpeed(); ;
         assertEquals(expected,actual);
